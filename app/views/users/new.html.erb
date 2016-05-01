@@ -1,0 +1,35 @@
+<div>
+	<h3>Register</h3>
+	<form action="/users" method="post">
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<p>first_name <input type="text" name="user[first_name]"></p>
+		<p>last_name <input type="text" name="user[last_name]"></p>
+		<p>email <input type="text" name="user[email]"></p>
+		<p>password <input type="text" name="user[password]"></p>
+		<p>password_confirmation <input type="text" name="user[password_confirmation]"></p>
+		<button>Register</button>
+	</form>
+	<% if @errors %>
+		<ul>
+			<% @errors.each do |error| %>
+				<li><%= error %></li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>
+<div>
+	<h3>Login</h3>
+	<form action="/users/login" method="post">
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<p>email <input type="text" name="user[email]"></p>
+		<p>password <input type="text" name="user[password]"></p>
+		<button>Login</button>
+	</form>
+	<% if @login_errors %>
+		<ul>
+			<% @login_errors.each do |error| %>
+				<li><%= error %></li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>

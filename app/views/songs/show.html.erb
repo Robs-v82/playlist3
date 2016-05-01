@@ -1,0 +1,22 @@
+<a href="/songs">Dashboard</a>
+<hr>
+<p>Others who added <%=@song.artist%> - <%=@song.title%>:</p>
+<% if @table_info %>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th><th>Times Added</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @table_info.each do |user| %>
+				<% unless user[3] == session[:user_id]%>
+					<tr>
+						<td><a href="/users/<%=user[3]%>"><%=user[0]%> <%=user[1]%></a></td>
+						<td><%=user[2]%></td>
+					</tr>
+				<% end %>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>

@@ -1,0 +1,41 @@
+<h3>Hello, <%=@user.first_name%> <%=@user.last_name%></h3>
+<hr>
+<p>All the songs in our hub: </p>
+<table>
+	<thead>
+		<tr>
+			<th>Artist</th><th>Title</th><th>No. of times</th><th>Add to playlist</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @table_info%>
+			<% @table_info.each do |song|%>
+				<tr>
+					<td><%= song[0]%></td>
+					<td><a href="/songs/<%=song[3]%>"><%= song[1]%></a></td>
+					<td><%= song[2]%></td>
+					<td><a href="/songs/add_link/<%=song[3]%>">Add</a></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+<hr>
+<h4>Add a song:</h4>
+<div>
+	<form action="/songs" method="post">
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<label>Artist:</label>
+		<input type="text" name="song[artist]">
+		<label>Title:</label>
+		<input type="text" name="song[title]">
+		<button>Add song</button>
+	</form>
+	<% if flash[:errors]%>
+		<ul>
+			<% flash[:errors].each do |error| %>
+				<li><%= error %></li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>
